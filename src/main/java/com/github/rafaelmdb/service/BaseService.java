@@ -9,17 +9,9 @@ import org.springframework.http.HttpStatus;
 import java.util.UUID;
 
 public class BaseService {
-    protected void validarAlteracao(UUID id, UUID idDto, JpaRepository repo) {
+    protected void validarAlteracao(UUID id, JpaRepository repo) {
         if (id == null) {
-            throw new RegraNegocioException("Id não foi informado na requisição");
-        }
-
-        if (idDto == null) {
-            throw new RegraNegocioException("Id do objeto não foi informado");
-        }
-
-        if (!id.equals(idDto)) {
-            throw new RegraNegocioException("Id da requisição divergente do Id do objeto");
+            throw new RegraNegocioException("Id não foi informado");
         }
 
         if (!repo.existsById(id)) {
