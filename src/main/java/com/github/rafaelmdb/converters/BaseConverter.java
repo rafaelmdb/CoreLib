@@ -2,7 +2,6 @@ package com.github.rafaelmdb.converters;
 
 import com.github.rafaelmdb.base.BaseDto;
 import com.github.rafaelmdb.base.BaseEntity;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;

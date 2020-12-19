@@ -9,7 +9,6 @@ import java.util.Locale;
 
 @Component
 public class MessageServiceHandler implements MessageService{
-
     @Autowired
     private MessageSource messageSource;
 
@@ -24,5 +23,4 @@ public class MessageServiceHandler implements MessageService{
             throw new RegraNegocioException(this.getMessage(message, null));
         }
     }
-
 }
