@@ -26,7 +26,7 @@ public class BaseController {
 
         response.setHeader(PAGE_NO, String.valueOf(page.getPageable().getPageNumber()));
         response.setHeader(PAGE_SIZE, String.valueOf(page.getPageable().getPageSize()));
-        response.setHeader(LIMIT, String.valueOf(page.getTotalPages()>page.getPageable().getPageNumber()));
+        response.setHeader(LIMIT, String.valueOf(page.getTotalPages()>page.getPageable().getPageNumber()+1));
 
         return converter.createFromEntities(page.getContent());
     }

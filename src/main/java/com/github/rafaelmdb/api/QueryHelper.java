@@ -25,8 +25,8 @@ public class QueryHelper<Entity extends BaseEntity> {
     }
 
     public Page<Entity> obterPorExemplo(JpaRepository<Entity, UUID> repo, Entity filtro, Integer pageNo, Integer pageSize, String sortBy){
-        if (pageNo==null || pageNo<=0){
-            pageNo=1;
+        if (pageNo==null || pageNo<0){
+            pageNo=0;
         }
 
         if(pageSize==null || pageSize<=0){
