@@ -1,6 +1,7 @@
 package com.github.rafaelmdb.api;
 
 import com.github.rafaelmdb.exception.RegraNegocioException;
+import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,5 +63,18 @@ public class ControllerAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiErrors handleIllegalArgumentException(HttpMessageNotReadableException exception) {
         return new ApiErrors("Argumento inválido recebido");
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ApiErrors handleIllegalArgumentException(ConstraintViolationException exception) {
+        List<String> mensagens =
+                exception.getConstraintViolations()
+                .stream()
+                .map(constraintViolation->constraintViolation.getMessage())
+                .collect(Collectors.toList());
+
+        String mensagem = StringUtils.join(mensagens, '\n');
+        return new ApiErrors(mensagem);
     }
 }

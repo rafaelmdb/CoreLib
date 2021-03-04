@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public class BaseController {
-
     private static final String PAGE_NO = "PAGE_NO";
     private static final String PAGE_SIZE = "PAGE_SIZE";
     private static final String LIMIT = "LIMIT";
